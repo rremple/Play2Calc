@@ -1,0 +1,55 @@
+@(paramForm: Form[FormData], params: Either[List[String], Option[String]])
+
+@import helper._
+
+@main(Html("Calculator"), nav = "calculator") {    
+
+  <div class="action">
+    @helper.form(action = routes.Calculator.submit)(showForm(paramForm))
+  </div>
+
+  <div class="output">
+    @params.fold(showErrors, showEvaluation)
+  </div>
+}
+
+@showForm(paramForm: Form[FormData]) = {
+      <table border="none">
+        <tr>
+          <td>@inputText(
+                paramForm("expression"), 
+                'size-> "80",
+                '_label -> "Expression:", 
+                '_help -> "Question to evaluate",
+                '_error -> paramForm.globalError
+            )</td>
+        </tr>
+        <tr>
+          <td>@textarea(
+                paramForm("conversions"), 
+                'rows -> "10", 'cols -> "50",
+                '_label -> "Conversions:", 
+                '_help -> "Enter unit equivilances in the form...",
+                '_error -> paramForm.globalError
+            )</td>
+        </tr>
+      </table>
+  
+      <input type="submit" value="Submit">
+}
+
+@showErrors(errors: List[String]) = {
+    <span id="errors">
+       @errors.head
+       <ul> @errors.tail.map { error =>
+         <li class="error">@error</li>
+       }
+       </ul>
+    </span>
+}
+
+@showEvaluation(evaluation: Option[String]) = {
+  @evaluation.map { e =>
+    <h2> = @e</h2>
+  }
+}
