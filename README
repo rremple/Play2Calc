@@ -1,4 +1,17 @@
-This is your new Play application
-=====================================
+The functionality is inspired by the Google Calculator, though I'm sure the implementation is 
+quite different.
 
-This file will be packaged with your application, when using `play dist`.
+This tool will evaluate expressions using SI or other convertible units and return the results
+in whatever units you require. For example, suppose you have the word problem, an object is 
+traveling 100 feet every 3 seconds -- how far, in miles, will travel in one hour? Simply ask 
+the calculator to evaluate (100 ft / 3 s) * 1 hr in mi and it will return the result 22.72 mi. 
+Cool, huh?
+
+Parsing does not rely on spaces between values, units, and operators, nor does it rely on 
+parentheses, so 100ft/3s*1hr in mi works just as well. Units are also optional, so 1+1 will 
+return 2 as expected!
+
+The math is the easy part -- the hard part is the parsing. This project demonstrates the use 
+of Scala parser-combinators for syntax-directed translation. This implementation gives separate 
+syntax rules for value expressions and units expressions, and then they are combined using 
+multiplication.
