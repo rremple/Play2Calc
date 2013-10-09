@@ -3,9 +3,16 @@
 # ~~~~
 
 # Home page
-GET     /                 controllers.Calculator.form
-GET     /about            controllers.Calculator.about
-POST    /                 controllers.Calculator.submit
+GET     /                  controllers.Calculator.form
+GET     /about             controllers.Application.about
+
+# Calculator
+#GET     /calc             controllers.Calculator.form
+POST    /calc              controllers.Calculator.submit
+
+# Parser
+GET     /parse             controllers.Parse.form
+POST    /parse             controllers.Parse.submit
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file     controllers.Assets.at(path="/public", file)

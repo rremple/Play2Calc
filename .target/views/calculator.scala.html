@@ -1,4 +1,4 @@
-@(paramForm: Form[FormData], params: Either[List[String], Option[String]])
+@(paramForm: Form[CalcParameters], params: Either[List[String], Option[String]])
 
 @import helper._
 
@@ -13,23 +13,23 @@
   </div>
 }
 
-@showForm(paramForm: Form[FormData]) = {
+@showForm(paramForm: Form[CalcParameters]) = {
       <table border="none">
-        <tr>
-          <td>@textarea(
-                paramForm("conversions"), 
-                'rows -> "10", 'cols -> "50",
-                '_label -> "Conversions:", 
-                '_help -> "Enter unit equivilances in the form...",
-                '_error -> paramForm.globalError
-            )</td>
-        </tr>
         <tr>
           <td>@inputText(
                 paramForm("expression"), 
                 'size-> "80",
                 '_label -> "Expression:", 
                 '_help -> "Question to evaluate",
+                '_error -> paramForm.globalError
+            )</td>
+        </tr>
+        <tr>
+          <td>@textarea(
+                paramForm("conversions"), 
+                'rows -> "10", 'cols -> "50",
+                '_label -> "Conversions:", 
+                '_help -> "Enter unit equivilances in the form...",
                 '_error -> paramForm.globalError
             )</td>
         </tr>

@@ -25,10 +25,13 @@
                     <hr class="space" />
                     <ul class="nav">
                         <li class="@("active".when(nav == "calculator"))">
-                            <a href="@routes.Calculator.form">Home</a>
+                            <a href="@routes.Calculator.form">Calculate</a>
+                        </li>
+                        <li class="@("active".when(nav == "parser"))">
+                            <a href="@routes.Parse.form">Parse/Interpret</a>
                         </li>
                         <li class="@("active".when(nav == "about"))">
-                            <a href="@routes.Calculator.about">About</a>
+                            <a href="@routes.Application.about">About</a>
                         </li>
                     </ul>
             </div>

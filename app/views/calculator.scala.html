@@ -1,4 +1,4 @@
-@(paramForm: Form[FormData], params: Either[List[String], Option[String]])
+@(paramForm: Form[CalcParameters], params: Either[List[String], Option[String]])
 
 @import helper._
 
@@ -13,7 +13,7 @@
   </div>
 }
 
-@showForm(paramForm: Form[FormData]) = {
+@showForm(paramForm: Form[CalcParameters]) = {
       <table border="none">
         <tr>
           <td>@inputText(

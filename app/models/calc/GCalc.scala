@@ -1,6 +1,7 @@
-package models
+package models.calc
 
 import scala.util.parsing.combinator.RegexParsers
+
 
 /*
  * Use parser-combinators for syntax-directed translation. This implementation gives separate syntax rules

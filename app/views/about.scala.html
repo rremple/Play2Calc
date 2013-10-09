@@ -1,9 +1,14 @@
-@main(Html("Calculator"), nav = "about") {
+@main(Html("Calculator and Parser/Interpretor"), nav = "about") {
 
   <div class="description">
 
-<p>The functionality is inspired by the 
-<a href="http://www.google.com/help/features.html#reference">Google Calculator</a>, though I'm sure the 
+<p>See <a href="https://sites.google.com/a/bodik.org/cs164/" target="_blank">CS164: Hack Your Language!</a> and 
+related YouTube lectures for information about these. The link to PA1 includes test programs that the Parser/Interpreter 
+will run.
+</p><br/>
+
+<p>The Calculator functionality is inspired by the 
+<a href="http://www.google.com/help/features.html#reference" target="_blank">Google Calculator</a>, though I'm sure the 
 implementation is quite different.
 </p><br/>
 <p>
@@ -24,4 +29,12 @@ so <q>100ft/3s*1hr in mi</q> works just as well. Units are also optional, so <q>
     for value expressions and units expressions, and then they are combined using multiplication.
   </div>
 </p>
+</p><br/>
+
+<p>The Parser/Interpreter implements a small programming language as defined in CS164. For a given program,
+the intermediate AST is shown along with the console output (from "print" and "error" statements) and the final
+result (if a non-null result is returned). Unlike the Calculator, here the parser and interpretor are
+separate components.
+</p>
+
 }

@@ -5,20 +5,20 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
-
 import views._
-
 import models._
+import models.calc.GCalc
+import models.CalcParameters
 
 object Calculator extends Controller {
 
-  val calculatorForm = Form[FormData](
+  val calculatorForm = Form[CalcParameters](
     mapping(
       "conversions" -> text,
       "expression" -> text
-    )(FormData.apply)(FormData.unapply))
+    )(CalcParameters.apply)(CalcParameters.unapply))
 
-  val defaultParams = FormData("""
+  val defaultParams = CalcParameters("""
 ft = 0.3048 m
 in = 0.0254 m
 cm = 0.01 m
@@ -44,7 +44,7 @@ hr = 3600.0 s""", ""
     )
   }
 
-  private def evaluationOf(params: FormData): Either[List[String], Option[String]] = {
+  private def evaluationOf(params: CalcParameters): Either[List[String], Option[String]] = {
     (new GCalc).parseConversions(params.conversions).fold(
       errors => Left(List("Unable to parse conversion rules", errors)),
       rules => ((new GCalc(rules)).evaluate(params.expression)).fold(
@@ -52,13 +52,6 @@ hr = 3600.0 s""", ""
         result => Right(Some(result.toString()))
       )
     )
-  }
-
-  /**
-   * Display about.
-   */
-  def about = Action {
-    Ok(html.about());
   }
 
 }

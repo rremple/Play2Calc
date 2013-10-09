@@ -1,0 +1,56 @@
+@(paramForm: Form[ParseParameters], 
+    params: Either[List[String], Option[(List[models.parse.Statement],List[String],Option[Double])]])
+
+@import helper._
+@import models.parse.Statement
+
+@main(Html("Parser/Interpreter"), nav = "parse") {    
+
+  <div class="action">
+    @helper.form(action = routes.Parse.submit)(showForm(paramForm))
+  </div>
+
+  <div class="output">
+    @params.fold(showErrors, showEvaluation)
+  </div>
+}
+
+@showForm(paramForm: Form[ParseParameters]) = {
+      <table border="none">
+        <tr>
+            <td>@textarea(
+                paramForm("input"), 
+                'rows -> "10", 'cols -> "50",
+                '_label -> "Input:", 
+                '_help -> "Program to interpret",
+                '_error -> paramForm.globalError
+            )</td>
+        </tr>
+      </table>
+  
+      <input type="submit" value="Submit">
+}
+
+@showErrors(errors: List[String]) = {
+    <span id="errors">
+       @errors.head
+       <ul> @errors.tail.map { error =>
+         <li class="error">@error</li>
+       }
+       </ul>
+    </span>
+}
+
+@showEvaluation(evaluation: Option[(List[Statement],List[String],Option[Double])]) = {
+    @evaluation.map {case (statements,output,result) =>
+        <h2>AST statements:</h2>
+        <textarea id="ast" name="ast" rows="10" cols="50">
+        @statements.map { statement => @statement }
+        </textarea>
+        @output.headOption.map {x =>
+            <h2>Console output:</h2>
+            @output.map { line => <p> @line </p><br/> }            
+        }
+        <h2>Result = @result.getOrElse("null") </h2>
+  }
+}

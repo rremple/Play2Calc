@@ -1,6 +1,6 @@
 package models
 
-case class FormData(
+case class CalcParameters(
   conversions: String,
   expression: String
   )

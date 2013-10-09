@@ -25,10 +25,13 @@
                     <hr class="space" />
                     <ul class="nav">
                         <li class="@("active".when(nav == "calculator"))">
-                            <a href="@routes.Calculator.form">Home</a>
+                            <a href="@routes.Calculator.form">Calculate</a>
+                        </li>
+                        <li class="@("active".when(nav == "parser"))">
+                            <a href="@routes.Parse.form">Parse/Interpret</a>
                         </li>
                         <li class="@("active".when(nav == "about"))">
-                            <a href="@routes.Calculator.about">About</a>
+                            <a href="@routes.Application.about">About</a>
                         </li>
                     </ul>
             </div>
@@ -46,7 +49,7 @@
             <footer style="text-align: center" class="column span-23 last">
                 <p>
                     Another <em>Russ Remple Learns Play 2.2</em> production 
-                    (source on <a href="https://github.com/rremple/Play2Calc">GitHub</a>)
+                    (source on <a href="https://github.com/rremple/Play2Calc" target="_blank">GitHub</a>)
                 
                 </p>
             </footer>

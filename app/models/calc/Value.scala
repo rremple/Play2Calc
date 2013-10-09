@@ -1,4 +1,4 @@
-package models
+package models.calc
 
 /*
  * A value is a quantity along with its Units. The default, where units are an empty map, represents a scalar.
