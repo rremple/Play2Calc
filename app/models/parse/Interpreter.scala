@@ -116,7 +116,7 @@ class Interpreter(debug: Boolean = false) {
           evaluate(lambdaFrame.resetReturn, lambda.body).returnValue
         }
         case Right(x) => {
-          throw new RuntimeException("***** Can't call a non-lambda:" + x)
+          throw new RuntimeException("***** Can't call a non-lambda: " + x)
         }
       }
     }
@@ -220,8 +220,17 @@ class Interpreter(debug: Boolean = false) {
 
   def interpret(statements: List[Statement]) = {
     console.clear
-    val result = evaluate(CallFrame(), Rewriter(debug).rewrite(statements)).returnValue
-    val value = result.fold(lambda => { console.print("result was a lambda!"); None }, num => num)
+    val value = try {
+      val result = evaluate(CallFrame(), Rewriter(debug).rewrite(statements)).returnValue
+      result.fold(lambda => {
+        console.print("result was a lambda!")
+        None
+      }, num => num)
+    } catch {
+      case e: Exception =>
+        console.print("Interpreter error >>> " + e.getMessage)
+        None
+    }
     (statements, console.get, value)
   }
 }

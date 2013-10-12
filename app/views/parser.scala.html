@@ -44,13 +44,11 @@
 @showEvaluation(evaluation: Option[(List[Statement],List[String],Option[Double])]) = {
     @evaluation.map {case (statements,output,result) =>
         <h2>AST statements:</h2>
-        <textarea id="ast" name="ast" rows="10" cols="50">
-        @statements.map { statement => @statement }
-        </textarea>
+        <textarea name="ast" rows="5" cols="50">@statements.map { statement =>@statement }</textarea>
         @output.headOption.map {x =>
             <h2>Console output:</h2>
-            @output.map { line => <p> @line </p><br/> }            
+            @output.map { line => <p>@line</p> }            
         }
-        <h2>Result = @result.getOrElse("null") </h2>
+        @result.map { r => <h2>Result = @r </h2> }
   }
 }
