@@ -179,7 +179,7 @@ class Interpreter(debug: Boolean = false) {
     case ErrorStatement(expression) => {
       if (debug) println("\n*I* St: ErrorStatement(" + expression + ")")
       console.print("  Error >>> ", evaluate(callFrame, expression));
-      callFrame.resetReturn
+      throw new RuntimeException("***** Exit due to error")
     }
 
     case IfElseStatement(ifEx, thenBody, elseBody) => {
@@ -236,7 +236,7 @@ class Interpreter(debug: Boolean = false) {
         nonLambda => nonLambda)
     } catch {
       case e: Exception =>
-        console.print("Interpreter error >>> " + e.getMessage)
+        console.print("Execution stopped >>> " + e.getMessage)
         None
     }
     (rewritenStatements, console.getOutput, returnValue)
